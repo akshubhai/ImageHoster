@@ -40,10 +40,13 @@ public class ImageRepository {
     //Returns the list of all the images fetched from the database
     public List<Image> getAllImages() {
         EntityManager em = emf.createEntityManager();
-        TypedQuery<Image> query = em.createQuery("SELECT i from Image i", Image.class);
-        List<Image> resultList = query.getResultList();
-
-        return resultList;
+        try {
+            TypedQuery<Image> query = em.createQuery("SELECT i from Image i", Image.class);
+            List<Image> resultList = query.getResultList();
+            return resultList;
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
 
     //The method creates an instance of EntityManager

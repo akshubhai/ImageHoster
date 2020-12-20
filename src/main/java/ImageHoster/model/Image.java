@@ -52,17 +52,18 @@ public class Image {
     private List<Tag> tags = new ArrayList<>();
 
 
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
     //Map list of all comments to image
-    @OneToMany(mappedBy = "Image", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    private List<Comment> comments = new ArrayList<>();
+//    @OneToMany(mappedBy = "Image", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+//    private List<Comment> comments = new ArrayList<>();
+
+//
+//    public List<Comment> getComments() {
+//        return comments;
+//    }
+//
+//    public void setComments(List<Comment> comments) {
+//        this.comments = comments;
+//    }
 
     public Image() {
     }
