@@ -98,9 +98,10 @@ public class ImageController {
         User imageCreator = image.getUser();
         User loggedInUser = (User) session.getAttribute("loggeduser");
 
+        String error = "Only the owner of the image can edit the image";
 
         if(!imageCreator.getUsername().equalsIgnoreCase(loggedInUser.getUsername())){
-            String error = "Only the owner of the image can edit the image";
+            //String error = "Only the owner of the image can edit the image";
             String imgTit = image.getTitle();
             redirect.addAttribute("editError", error).addFlashAttribute("editError", error);
             return "redirect:images/"+imageId+"/"+imgTit;
@@ -145,7 +146,9 @@ public class ImageController {
         updatedImage.setDate(new Date());
 
         imageService.updateImage(updatedImage);
-        return "redirect:/images/" + updatedImage.getTitle();
+        //return "redirect:/images/" + updatedImage.getTitle();
+
+        return "redirect:images/"+imageId+"/"+updatedImage.getTitle();
     }
 
 
