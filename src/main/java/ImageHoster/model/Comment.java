@@ -29,12 +29,12 @@ public class Comment {
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "image")
-    private Image image;
+    @JoinColumn(name = "Image")
+    private Image Image;
 
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setImage(Image Image) {
+        this.Image = Image;
     }
 
     public Integer getId() {
@@ -46,7 +46,7 @@ public class Comment {
     }
 
     public Image getImage() {
-        return image;
+        return Image;
     }
 
     public void setText(String text) {
