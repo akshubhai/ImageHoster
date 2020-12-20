@@ -29,8 +29,13 @@ public class Comment {
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user")
-    private User user;
+    @JoinColumn(name = "image")
+    private Image image;
+
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
 
     public Integer getId() {
         return id;
@@ -38,6 +43,10 @@ public class Comment {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Image getImage() {
+        return image;
     }
 
     public void setText(String text) {
