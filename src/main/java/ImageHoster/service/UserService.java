@@ -14,7 +14,8 @@ public class UserService {
     private UserRepository userRepository;
 
     //Create required regex string for atleast one character number and special character
-    private static final String PASSWORD_PATTERN = "^(?=.*([a-z]|[A-Z])(?=.*[0-9])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{3,} ";
+    //private static final String PASSWORD_PATTERN = "^(?=.*([a-z]|[A-Z])(?=.*[0-9])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{3,12}$";
+    private static final String PASSWORD_PATTERN = "\\?=.\\*([a-z]|[A-Z])(\\?=.\\*[0-9])";
 
     //Create password pattern object to compile regex string
     private static final Pattern pattern = Pattern.compile(PASSWORD_PATTERN);

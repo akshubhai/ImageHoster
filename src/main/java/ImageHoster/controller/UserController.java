@@ -45,16 +45,14 @@ public class UserController {
         userService.registerUser(user);
         boolean passwordCheck = userService.passwordStrengthCheck(user);
 
+        //if password matches requirement then register new user
         if (passwordCheck == true){
             userService.registerUser(user);
             return "redirect:/users/login";
         }
-        else {
-
+        else { // else we reload registration page
+            return "redirect:/users/registration";
         }
-
-        userService.registerUser(user);
-        return "redirect:/users/login";
     }
 
     //This controller method is called when the request pattern is of type 'users/login'
