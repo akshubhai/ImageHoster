@@ -15,8 +15,8 @@ public class UserService {
 
     //Create required regex string for atleast one character number and special character
     //private static final String PASSWORD_PATTERN = "^(?=.*([a-z]|[A-Z])(?=.*[0-9])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{3,12}$";
-    private static final String PASSWORD_PATTERN = "\\?=.\\*([a-z]|[A-Z])(\\?=.\\*[0-9])";
-
+    //private static final String PASSWORD_PATTERN = "\\?=.\\*([a-z]|[A-Z])(\\?=.\\*[0-9])(\\?=.\\*[!@#&()–[{}]:;',?/*~$^+=<>]).{3,16}$";
+    private static final String PASSWORD_PATTERN = "^(?=.*[a-z]|[A-Z])(?=.*[0-9])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{3,16}$";
     //Create password pattern object to compile regex string
     private static final Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
 

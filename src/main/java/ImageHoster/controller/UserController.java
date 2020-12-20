@@ -42,7 +42,8 @@ public class UserController {
     //This method calls the business logic and after the user record is persisted in the database, directs to login page
     @RequestMapping(value = "users/registration", method = RequestMethod.POST)
     public String registerUser(User user, RedirectAttributes redirect) {
-        userService.registerUser(user);
+
+        //Call required service to check for password strength
         boolean passwordCheck = userService.passwordStrengthCheck(user);
 
         //if password matches requirement then register new user
@@ -51,6 +52,8 @@ public class UserController {
             return "redirect:/users/login";
         }
         else { // else we reload registration page
+            String error = "Password must contain at least 1 alphabet, 1 number & 1 special character";
+            redirect.addAttribute("passwordTypeError", error).addFlashAttribute("passwordTypeError", error);
             return "redirect:/users/registration";
         }
     }
