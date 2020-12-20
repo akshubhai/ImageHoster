@@ -249,6 +249,7 @@ public class ImageControllerTest {
         user.setPassword("password1@");
 
         session = new MockHttpSession();
+
         session.setAttribute("loggeduser", user);
 
         Image image = new Image();
