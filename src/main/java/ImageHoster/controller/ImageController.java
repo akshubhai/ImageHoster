@@ -51,6 +51,7 @@ public class ImageController {
         Image image = imageService.getImageByTitle(title, id);
         model.addAttribute("image", image);
         model.addAttribute("tags", image.getTags());
+        model.addAttribute("tags", image.getComments());
         return "images/image";
     }
 
