@@ -10,7 +10,7 @@ public class CommentService {
     private CommentRepository commentRepository;
 
     public Comment addNewComment(Comment newComment){
-        commentRepository.addNewComment(newComment);
+        return commentRepository.addNewComment(newComment);
     }
 
 }
