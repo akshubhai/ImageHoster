@@ -5,6 +5,7 @@ import ImageHoster.model.Image;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Repository
 public class CommentRepository {
@@ -24,6 +25,16 @@ public class CommentRepository {
             transaction.rollback();
         }
         return newComment;
+    }
+
+    public List<Comment> getAllComments(Integer imageId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Comment> typedQuery = em.createQuery("SELECT c from Comment c where c.Image =:imageId", Comment.class).setParameter("imageId", imageId);
+            return typedQuery.getResultList();
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
 
 }

@@ -1,9 +1,6 @@
 package ImageHoster.model;
-
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "comments")
@@ -11,10 +8,10 @@ public class Comment {
 
     //@Id annotation specifies that the corresponding attribute is a primary key
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     //@Column annotation specifies that the attribute will be mapped to the column in the database.
     //Here the column name is explicitly mentioned as 'id'
-    @Column(name = "id")
     private Integer id;
 
     @Column(name = "text", length = 256)
@@ -24,48 +21,53 @@ public class Comment {
     private LocalDate createdDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "userid")
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "Image")
     private Image Image;
+
+    public Comment() {
+    }
 
     public Integer getId() {
         return id;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public LocalDate getCreatedDate() {
-        return createdDate;
-    }
-
-    public User getCommentuser() {
-        return user;
-    }
-
-    public Image getCommentImage() {
-        return Image;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
+    public String getText() {
+        return text;
+    }
+
     public void setText(String text) {
         this.text = text;
+    }
+
+    public LocalDate getCreatedDate() {
+        return createdDate;
     }
 
     public void setCreatedDate(LocalDate createdDate) {
         this.createdDate = createdDate;
     }
 
-    public void setCommentuser(User commentuser) {
-        this.user = commentuser;
+    public User getUser() {
+        return user;
     }
 
-    public void setCommentImage(Image commentImage) {
-        this.Image = commentImage;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public ImageHoster.model.Image getImage() {
+        return Image;
+    }
+
+    public void setImage(ImageHoster.model.Image image) {
+        Image = image;
     }
 }

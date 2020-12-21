@@ -5,6 +5,8 @@ import ImageHoster.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CommentService {
 
@@ -13,6 +15,10 @@ public class CommentService {
 
     public Comment addNewComment(Comment newComment){
         return commentRepository.addNewComment(newComment);
+    }
+
+    public List<Comment> getAllCommentsPerImage(Integer imageId) {
+        return commentRepository.getAllComments(imageId);
     }
 
 }
