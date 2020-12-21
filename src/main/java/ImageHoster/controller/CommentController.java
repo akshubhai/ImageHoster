@@ -24,16 +24,16 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @RequestMapping(value = "/images/{imageId}/{title}/comments")
-    public String getnewComment(@PathVariable("title") String title, @PathVariable("id") Integer id, Model model){
-        Image image = imageService.getImageByTitle(title, id);
-        model.addAttribute("image", image);
-        model.addAttribute("tags", image.getTags());
-
-        //Add comments attribute for image
-        model.addAttribute("comments", image.getComments());
-        return "redirect:/images/image";
-    }
+//    @RequestMapping(value = "/images/{imageId}/{title}/comments")
+//    public String getnewComment(@PathVariable("title") String title, @PathVariable("id") Integer id, Model model){
+//        Image image = imageService.getImageByTitle(title, id);
+//        model.addAttribute("image", image);
+//        model.addAttribute("tags", image.getTags());
+//
+//        //Add comments attribute for image
+//        model.addAttribute("comments", image.getComments());
+//        return "redirect:/images/image";
+//    }
 
     @RequestMapping(value = "/image/{imageId}/{title}/comments", method = RequestMethod.POST)
     public String addNewComment(@PathVariable(value = "imageId") Integer imageId, @PathVariable(value = "title") String title, @RequestParam(value = "comment") String userCommentInput, HttpSession session, Comment newComment){
