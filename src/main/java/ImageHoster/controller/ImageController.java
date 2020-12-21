@@ -54,9 +54,9 @@ public class ImageController {
         Image image = imageService.getImageByTitle(title, id);
         model.addAttribute("image", image);
 
-        model.addAttribute("tags", (List<Tag>)image.getTags());
+        model.addAttribute("tags", image.getTags());
 
-        //Add comments attribute for image
+        //Add comments attribute for image comment entity and fetch comments
         model.addAttribute("comments", (List<Comment>)image.getComments() );
 
         int x = 10;
@@ -103,19 +103,26 @@ public class ImageController {
     //This string is then displayed by 'edit.html' file as previous tags of an image
     @RequestMapping(value = "/editImage")
     public String editImage(@RequestParam("imageId") Integer imageId, Model model, HttpSession session, RedirectAttributes redirect) {
+        //Get required image via imageservice
         Image image = imageService.getImage(imageId);
+
+        //Get user who created image
         User imageCreator = image.getUser();
+
+        //get current logged in user
         User loggedInUser = (User) session.getAttribute("loggeduser");
 
+        //initialize possible error string message
         String error = "Only the owner of the image can edit the image";
 
+        //If creator and logged in user mismatch on imageId then we send error message
         if(imageCreator.getId() != loggedInUser.getId()){
             //String error = "Only the owner of the image can edit the image";
             String imgTit = image.getTitle();
             redirect.addAttribute("editError", error).addFlashAttribute("editError", error);
             return "redirect:/images/"+imageId+"/"+imgTit;
         }
-        else {
+        else { // if creator is current logged in user then continue to editing page
             String tags = convertTagsToString(image.getTags());
             model.addAttribute("image", image);
             model.addAttribute("tags", tags);
@@ -166,17 +173,24 @@ public class ImageController {
     //Looks for a controller method with request mapping of type '/images'
     @RequestMapping(value = "/deleteImage", method = RequestMethod.DELETE)
     public String deleteImageSubmit(@RequestParam(name = "imageId") Integer imageId, HttpSession session, RedirectAttributes redirect) {
+
+        //Get required image via imageservice
         Image image = imageService.getImage(imageId);
+
+        //Get user who created image
         User imageCreator = image.getUser();
+
+        //get current logged in user
         User loggedInUser = (User) session.getAttribute("loggeduser");
 
+        //If creator and logged in user mismatch on imageId then we send error message
         if(imageCreator.getId() != loggedInUser.getId()){
             String error = "Only the owner of the image can delete the image";
             String imgTit = image.getTitle();
             redirect.addAttribute("deleteError", error).addFlashAttribute("deleteError", error);
             return "redirect:/images/"+imageId+"/"+imgTit;
         }
-        else {
+        else { //else we delete message and call required service
             imageService.deleteImage(imageId);
             return "redirect:/images";
         }

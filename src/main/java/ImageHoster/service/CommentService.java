@@ -13,10 +13,12 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
+    //Adding new comment for given imageId
     public Comment addNewComment(Comment newComment){
         return commentRepository.addNewComment(newComment);
     }
 
+    //get all comments for an image
     public List<Comment> getAllCommentsPerImage(Integer imageId) {
         return commentRepository.getAllComments(imageId);
     }

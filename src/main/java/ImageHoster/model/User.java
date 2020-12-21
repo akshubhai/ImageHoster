@@ -41,10 +41,12 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Image> images = new ArrayList<>();
 
-    //@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    //user table reference to list of comment from comment table
     @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE, fetch = FetchType.EAGER )
     private List<Comment> comments = new ArrayList<>();
 
+
+    //Define getter and setter methods
     public List<Comment> getComments() {
         return comments;
     }

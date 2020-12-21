@@ -13,6 +13,7 @@ public class CommentRepository {
     @PersistenceUnit(unitName = "imageHoster")
     private EntityManagerFactory emf;
 
+    //Repo func to persist new comments into comments table
     public Comment addNewComment(Comment newComment){
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
@@ -27,6 +28,7 @@ public class CommentRepository {
         return newComment;
     }
 
+    //Repo func to pull all comments for given imageid
     public List<Comment> getAllComments(Integer imageId) {
         EntityManager em = emf.createEntityManager();
         try {

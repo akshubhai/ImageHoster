@@ -20,17 +20,23 @@ public class Comment {
     @Column(name = "createdDate")
     private LocalDate createdDate;
 
+    //emphasis on many to one relation with user table
     @ManyToOne(fetch = FetchType.EAGER)
+    //Actual column name in sql table
     @JoinColumn(name = "userid")
     private User user;
 
+    //emphasis on many to one relation with image table
     @ManyToOne(fetch = FetchType.EAGER)
+    //Actual column name in sql table
     @JoinColumn(name = "Image")
     private Image Image;
 
+    //Define constructor
     public Comment() {
     }
 
+    //Define getter and setter methods
     public Integer getId() {
         return id;
     }

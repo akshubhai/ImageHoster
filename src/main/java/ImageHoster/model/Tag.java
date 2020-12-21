@@ -34,7 +34,7 @@ public class Tag {
     }
 
 
-
+    //Define getter and setter methods
     public Tag(String tagName) {
         this.name = tagName;
     }
