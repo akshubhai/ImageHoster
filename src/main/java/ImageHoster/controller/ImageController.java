@@ -30,8 +30,6 @@ public class ImageController {
     @Autowired
     private TagService tagService;
 
-    @Autowired
-    private CommentService commentService;
 
     //This method displays all the images in the user home page after successful login
     @RequestMapping("images")
@@ -52,10 +50,11 @@ public class ImageController {
     //Here a list of tags is added in the Model type object
     //this list is then sent to 'images/image.html' file and the tags are displayed
     @RequestMapping("/images/{id}/{title}")
-    public String showImage(@PathVariable("title") String title, @PathVariable("id") Integer id,  Model model) {
+    public String showImage(@PathVariable("title") String title, @PathVariable("id") Integer id,  Model model) throws NullPointerException {
         Image image = imageService.getImageByTitle(title, id);
         model.addAttribute("image", image);
-        model.addAttribute("tags", image.getTags());
+
+        model.addAttribute("tags", (List<Tag>)image.getTags());
 
         //Add comments attribute for image
         model.addAttribute("comments", (List<Comment>)image.getComments() );
@@ -110,7 +109,7 @@ public class ImageController {
 
         String error = "Only the owner of the image can edit the image";
 
-        if(!imageCreator.getUsername().equalsIgnoreCase(loggedInUser.getUsername())){
+        if(imageCreator.getId() != loggedInUser.getId()){
             //String error = "Only the owner of the image can edit the image";
             String imgTit = image.getTitle();
             redirect.addAttribute("editError", error).addFlashAttribute("editError", error);
@@ -171,7 +170,7 @@ public class ImageController {
         User imageCreator = image.getUser();
         User loggedInUser = (User) session.getAttribute("loggeduser");
 
-        if(!imageCreator.getUsername().equalsIgnoreCase(loggedInUser.getUsername())){
+        if(imageCreator.getId() != loggedInUser.getId()){
             String error = "Only the owner of the image can delete the image";
             String imgTit = image.getTitle();
             redirect.addAttribute("deleteError", error).addFlashAttribute("deleteError", error);
