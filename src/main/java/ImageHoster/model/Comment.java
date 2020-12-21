@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-
 @Table(name = "comments")
 public class Comment {
 
@@ -25,40 +24,13 @@ public class Comment {
     private LocalDate createdDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user")
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "Image")
     private Image Image;
-
-
-    public void setImage(Image Image) {
-        this.Image = Image;
-    }
 
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Image getImage() {
-        return Image;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getText() {
@@ -69,7 +41,31 @@ public class Comment {
         return createdDate;
     }
 
-    public User getUser() {
+    public User getCommentuser() {
         return user;
+    }
+
+    public Image getCommentImage() {
+        return Image;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public void setCommentuser(User commentuser) {
+        this.user = commentuser;
+    }
+
+    public void setCommentImage(Image commentImage) {
+        this.Image = commentImage;
     }
 }
