@@ -54,6 +54,7 @@ public class ImageController {
 
         //Add comments attribute for image
         model.addAttribute("comments", image.getComments());
+
         return "images/image";
     }
 
@@ -107,7 +108,7 @@ public class ImageController {
             //String error = "Only the owner of the image can edit the image";
             String imgTit = image.getTitle();
             redirect.addAttribute("editError", error).addFlashAttribute("editError", error);
-            return "redirect:images/"+imageId+"/"+imgTit;
+            return "redirect:/images/"+imageId+"/"+imgTit;
         }
         else {
             String tags = convertTagsToString(image.getTags());
@@ -151,7 +152,7 @@ public class ImageController {
         imageService.updateImage(updatedImage);
         //return "redirect:/images/" + updatedImage.getTitle();
 
-        return "redirect:images/"+imageId+"/"+updatedImage.getTitle();
+        return "redirect:/images/"+imageId+"/"+updatedImage.getTitle();
     }
 
 
@@ -168,7 +169,7 @@ public class ImageController {
             String error = "Only the owner of the image can delete the image";
             String imgTit = image.getTitle();
             redirect.addAttribute("deleteError", error).addFlashAttribute("deleteError", error);
-            return "redirect:images/"+imageId+"/"+imgTit;
+            return "redirect:/images/"+imageId+"/"+imgTit;
         }
         else {
             imageService.deleteImage(imageId);
